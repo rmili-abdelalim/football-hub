@@ -170,7 +170,8 @@ export const footballData: SportsProvider = {
     const json = await get(`/competitions/${code}/standings${seasonQ(season)}`);
     return (json.standings ?? []).map(
       (s: any): StandingTable => ({
-        group: str(s.group)?.replace(/_/g, ' '),
+        // Seuls les vrais groupes (« Group A »…) sont gardés ; la source met « Matchday » pour les championnats
+        group: /^group/i.test(String(s.group ?? '')) ? str(s.group)?.replace(/_/g, ' ') : undefined,
         type: str(s.type),
         rows: (s.table ?? []).map((r: any) => ({
           position: num(r.position) ?? 0,
