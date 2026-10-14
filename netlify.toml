@@ -22,7 +22,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
     Permissions-Policy = "geolocation=(), camera=(), microphone=()"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://crests.football-data.org https://www.thesportsdb.com https://r2.thesportsdb.com https://media.api-sports.io; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self'; manifest-src 'self'; worker-src 'self'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://crests.football-data.org https://www.thesportsdb.com https://r2.thesportsdb.com https://media.api-sports.io; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://crests.football-data.org https://www.thesportsdb.com https://r2.thesportsdb.com https://media.api-sports.io; font-src 'self'; manifest-src 'self'; worker-src 'self'"
 
 [[headers]]
   for = "/assets/*"
