@@ -25,6 +25,9 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Les écussons externes ne passent pas par le service worker (ils restent en cache navigateur) :
+        // un service worker installé garde sa politique CSP, ce qui bloquait les images.
+        cleanupOutdatedCaches: true,
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
@@ -37,16 +40,6 @@ export default defineConfig({
               networkTimeoutSeconds: 8,
               expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 7 },
               cacheableResponse: { statuses: [200] },
-            },
-          },
-          {
-            urlPattern: ({ url }) =>
-              /crests\.football-data\.org|thesportsdb\.com\/images|media\.api-sports\.io/.test(url.href),
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'crests',
-              expiration: { maxEntries: 400, maxAgeSeconds: 60 * 60 * 24 * 30 },
-              cacheableResponse: { statuses: [0, 200] },
             },
           },
         ],
