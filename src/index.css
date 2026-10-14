@@ -1,0 +1,106 @@
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow-condensed/500.css';
+@import '@fontsource/barlow-condensed/700.css';
+@import '@fontsource/noto-kufi-arabic/400.css';
+@import '@fontsource/noto-kufi-arabic/600.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palette « stade sous projecteurs » — valeurs RGB pour l'opacité Tailwind */
+:root {
+  --bg: 246 247 242; /* craie */
+  --surface: 255 255 255;
+  --sunken: 236 239 233;
+  --ink: 20 32 27;
+  --muted: 92 107 99;
+  --line: 214 220 211;
+  --turf: 30 122 76; /* pelouse */
+  --turf-ink: 255 255 255;
+  --flood: 196 128 10; /* projecteur (texte lisible sur fond clair) */
+  --card: 200 50 50; /* carton rouge */
+  color-scheme: light;
+}
+.dark {
+  --bg: 15 27 23; /* encre de pelouse nocturne */
+  --surface: 22 37 31;
+  --sunken: 11 21 18;
+  --ink: 231 238 233;
+  --muted: 150 168 158;
+  --line: 39 58 50;
+  --turf: 72 178 120;
+  --turf-ink: 9 20 15;
+  --flood: 240 178 58;
+  --card: 235 92 92;
+  color-scheme: dark;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+  font-size: 15px;
+  line-height: 1.45;
+}
+[dir='rtl'] body {
+  line-height: 1.6;
+}
+
+/* Chiffres de tableau d'affichage */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--turf));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skeleton {
+  @apply bg-sunken rounded;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+.live-dot {
+  animation: live 1.6s ease-in-out infinite;
+}
+@keyframes live {
+  50% {
+    opacity: 0.25;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .live-dot {
+    animation: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Icônes directionnelles inversées en RTL */
+[dir='rtl'] .flip-rtl {
+  transform: scaleX(-1);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
